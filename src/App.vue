@@ -1,9 +1,12 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import Sql2Struct from './components/Sql2Struct.vue'
 </script>
 
 <template>
+  <router-view></router-view>
+
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -13,7 +16,7 @@ import TheWelcome from './components/TheWelcome.vue'
   </header>
 
   <main>
-    <TheWelcome />
+    <Sql2Struct />
   </main>
 </template>
 
