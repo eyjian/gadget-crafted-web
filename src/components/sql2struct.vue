@@ -69,8 +69,20 @@ export default {
   methods: {
     async sendRequest() {
       try {
-        const response = await axios.post('http://127.0.0.1:2024/api/sql2struct', this.request);
-        this.response.Result = response.data.result;
+        const response = await fetch('http://www.mooon.net:2024/api/sql2struct', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.request)
+        });
+
+        if (!response.ok) {
+          throw new Error('网络响应错误');
+        }
+
+        const data = await response.json();
+        this.response.Result = data.result;
       } catch (error) {
         console.error('请求失败:', error);
         this.response.Result = '请求失败，请检查控制台错误信息。';
