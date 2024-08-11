@@ -71,6 +71,7 @@ export default {
       try {
         const response = await fetch('http://localhost:2024/api/sql2struct', {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
