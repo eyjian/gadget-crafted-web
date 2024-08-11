@@ -24,7 +24,7 @@
       <label for="customTagsInput">Custom Tags:</label>
       <input type="text" id="customTagsInput" v-model="request.CustomTags">
     </div>
-    <button @click="sendRequest">箭头按钮</button>
+    <button @click="sendRequest">生成</button>
     <div>
       <label for="resultInput">响应结果:</label>
       <textarea id="resultInput" v-model="response.Result" rows="10" readonly></textarea>
@@ -69,10 +69,11 @@ export default {
   methods: {
     async sendRequest() {
       try {
-        const response = await fetch('http://www.mooon.net:2024/api/sql2struct', {
+        const response = await fetch('http://localhost:2024/api/sql2struct', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
           },
           body: JSON.stringify(this.request)
         });
