@@ -38,8 +38,10 @@
     <!-- 开关 -->
     <div class="switch-section">
       <div v-for="(value, key) in booleanOptions" :key="key" class="checkbox-container">
-        <label :for="`checkbox-${key}`">{{ value }}:</label>
-        <input type="checkbox" :id="`checkbox-${key}`" v-model="request[key]">
+        <div class="flex-container">
+          <input type="checkbox" :id="`checkbox-${key}`" v-model="request[key]">
+          <label :for="`checkbox-${key}`"> {{ value }}</label>
+        </div>
       </div>
     </div>
 
@@ -144,8 +146,10 @@ h1 {
 }
 
 .flex-container {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* 使容器成为一个 flex 容器 */
+  align-items: center; /* 水平居中对齐 flex 容器内的元素 */
+  //justify-content: center; /* 垂直居中对齐 flex 容器内的元素 */
+  gap: 10px; /* 在 flex 容器内的元素之间添加间距 */
 }
 
 .flex-item {
@@ -163,7 +167,7 @@ h1 {
 }
 
 .checkbox-container {
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* 可选：为每个复选框容器添加底部边距 */
 }
 
 .generate-btn {
