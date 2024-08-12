@@ -19,11 +19,6 @@
           <label for="customTagsInput">自定义 Tags:</label>
           <input type="text" id="customTagsInput" v-model="request.custom_tags" placeholder="例如：">
         </div>
-      </div>
-    </div>
-
-    <div class="input-section">
-      <div class="flex-container">
         <div class="flex-item">
           <label for="tablePrefixInput">表名前缀:</label>
           <input type="text" id="tablePrefixInput" v-model="request.table_prefix" placeholder="例如：t_">
@@ -37,10 +32,12 @@
 
     <!-- 开关 -->
     <div class="switch-section">
-      <div v-for="(value, key) in booleanOptions" :key="key" class="checkbox-container">
-        <div class="flex-container">
-          <input type="checkbox" :id="`checkbox-${key}`" v-model="request[key]">
-          <label :for="`checkbox-${key}`"> {{ value }}</label>
+      <div class="grid-container">
+        <div v-for="(value, key) in booleanOptions" :key="key" class="checkbox-container">
+          <div class="flex-container">
+            <input type="checkbox" :id="`checkbox-${key}`" v-model="request[key]">
+            <label :for="`checkbox-${key}`"> {{ value }}</label>
+          </div>
         </div>
       </div>
     </div>
@@ -80,13 +77,13 @@ export default {
         Result: ''
       },
       booleanOptions: {
-        with_gorm: '是否生成 Gorm Tag',
-        with_json: '是否生成 Json Tag',
-        with_db: '是否生成 DB Tag',
-        with_form: '是否生成 Form Tag',
-        with_table_name_func: '是否生成 TableName 方法',
-        json_with_prefix: '生成的 Json Tag 时是否添加前缀',
-        form_with_prefix: '生成的 Form Tag 时是否添加前缀'
+        with_gorm: '生成 Gorm Tag',
+        with_json: '生成 Json Tag',
+        with_db: '生成 DB Tag',
+        with_form: '生成 Form Tag',
+        with_table_name_func: '生成 TableName 方法',
+        json_with_prefix: 'Json Tag 添加前缀',
+        form_with_prefix: 'Form Tag 添加前缀'
       }
     };
   },
@@ -124,7 +121,7 @@ body {
 
 /* 样式可以根据需要进行调整 */
 .container {
-  max-width: 1200px;
+  max-width: 1350px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -142,7 +139,7 @@ h1 {
 
 .wd-1200 {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1350px;
 }
 
 .flex-container {
@@ -179,9 +176,39 @@ h1 {
   color: black;
   border: none;
   cursor: pointer;
+  margin-bottom: 20px; /* 调整这个值以增加按钮和结果框之间的间距 */
 }
 
 .generate-btn:hover {
   background-color: #45a049;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 第一行显示4个flex-container */
+  grid-gap: 10px; /* 设置网格间距 */
+}
+
+.switch-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px; /* 调整这个值以减少两行间的间距 */
+}
+
+.flex-column {
+  flex: 0 0 calc(25% - 10px); /* 25%即每行4个，减去间距确保最后一行的元素也能对齐 */
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .flex-column {
+    flex: 0 0 calc(33.33% - 10px); /* 33.33%即每行3个，减去间距确保最后一行的元素也能对齐 */
+  }
 }
 </style>
