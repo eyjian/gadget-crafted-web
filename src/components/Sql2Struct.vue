@@ -1,33 +1,54 @@
 <template>
-  <div>
-    <div>
-      <label for="sqlInput">SQL:</label>
-      <textarea id="sqlInput" v-model="request.Sql" rows="10"></textarea>
+  <div class="container">
+    <h1>SQL 转 Go Struct 在线工具</h1>
+
+    <!-- 输入框 -->
+    <div class="input-section">
+      <label for="sqlInput">建表 SQL 语句:</label>
+      <textarea class="wd-1200" id="sqlInput" v-model="request.sql" rows="10"></textarea>
     </div>
-    <div>
-      <label for="packageNameInput">Package Name:</label>
-      <input type="text" id="packageNameInput" v-model="request.PackageName">
+
+    <!-- 前缀控制 -->
+    <div class="input-section">
+      <div class="flex-container">
+        <div class="flex-item">
+          <label for="packageNameInput">包名:</label>
+          <input type="text" id="packageNameInput" v-model="request.package_name">
+        </div>
+        <div class="flex-item">
+          <label for="tablePrefixInput">表名前缀:</label>
+          <input type="text" id="tablePrefixInput" v-model="request.table_prefix" placeholder="例如：t_">
+        </div>
+        <div class="flex-item">
+          <label for="fieldPrefixInput">字段名前缀:</label>
+          <input type="text" id="fieldPrefixInput" v-model="request.field_prefix" placeholder="例如：f_">
+        </div>
+      </div>
+
+      <!-- 自定义标签 -->
+      <div class="flex-container">
+        <div class="flex-item">
+          <label for="customTagsInput">Custom Tags:</label>
+          <input type="text" id="customTagsInput" v-model="request.custom_tags" placeholder="例如：">
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="tablePrefixInput">Table Prefix:</label>
-      <input type="text" id="tablePrefixInput" v-model="request.TablePrefix">
+
+    <!-- 开关 -->
+    <div class="switch-section">
+      <div v-for="(value, key) in booleanOptions" :key="key" class="checkbox-container">
+        <label :for="`checkbox-${key}`">{{ value }}:</label>
+        <input type="checkbox" :id="`checkbox-${key}`" v-model="request[key]">
+      </div>
     </div>
-    <div>
-      <label for="fieldPrefixInput">Field Prefix:</label>
-      <input type="text" id="fieldPrefixInput" v-model="request.FieldPrefix">
-    </div>
-    <div v-for="(value, key) in booleanOptions" :key="key">
-      <label :for="`checkbox-${key}`">{{ key }}:</label>
-      <input type="checkbox" :id="`checkbox-${key}`" v-model="request[key]">
-    </div>
-    <div>
-      <label for="customTagsInput">Custom Tags:</label>
-      <input type="text" id="customTagsInput" v-model="request.CustomTags">
-    </div>
-    <button @click="sendRequest">生成</button>
-    <div>
+
+    <!-- 生成按钮 -->
+    <button class="generate-btn" @click="sendRequest">生成 struct</button>
+
+    <!-- 结果框 -->
+    <div class="output-section">
       <label for="resultInput">响应结果:</label>
-      <textarea id="resultInput" v-model="response.Result" rows="10" readonly></textarea>
+      <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="10" readonly></textarea>
     </div>
   </div>
 </template>
@@ -39,29 +60,29 @@ export default {
   data() {
     return {
       request: {
-        Sql: '',
-        PackageName: '',
-        TablePrefix: '',
-        FieldPrefix: '',
-        WithGorm: false,
-        WithJson: false,
-        WithDb: false,
-        WithForm: false,
-        WithTableNameFunc: false,
-        JsonWithPrefix: false,
-        FormWithPrefix: false,
-        CustomTags: ''
+        sql: '',
+        package_name: '',
+        table_prefix: '',
+        field_prefix: '',
+        with_gorm: false,
+        with_json: false,
+        with_db: false,
+        with_form: false,
+        with_table_name_func: false,
+        json_with_prefix: false,
+        form_with_prefix: false,
+        custom_tags: ''
       },
       response: {
         Result: ''
       },
       booleanOptions: {
-        WithGorm: '是否生成 Gorm tag',
-        WithJson: '是否生成 Json tag',
-        WithDb: '是否生成 Db tag',
-        WithForm: '是否生成 Form tag',
-        WithTableNameFunc: '是否生成 TableName 方法',
-        JsonWithPrefix: '生成的 Json tag 时是否添加前缀',
+        with_gorm: '是否生成 Gorm tag',
+        with_json: '是否生成 Json tag',
+        with_db: '是否生成 Db tag',
+        with_form: '是否生成 Form tag',
+        with_table_name_func: '是否生成 TableName 方法',
+        json_with_prefix: '生成的 Json tag 时是否添加前缀',
         FormWith栏位: '生成的 Form tag 时是否添加前栏位'
       }
     };
@@ -69,12 +90,11 @@ export default {
   methods: {
     async sendRequest() {
       try {
-        const response = await fetch('http://localhost:2024/api/sql2struct', {
+        const response = await fetch('http://127.0.0.1:2024/api/sql2struct', {
           method: 'POST',
-          mode: 'cors',
+          //dataType: 'jsonp',
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
           },
           body: JSON.stringify(this.request)
         });
@@ -96,13 +116,62 @@ export default {
 
 <style>
 /* 样式可以根据需要进行调整 */
-div {
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.input-section, .switch-section, .output-section {
+  margin-bottom: 30px;
+}
+
+.wd-1200 {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-item {
+  display: flex;
+  align-items: center;
+}
+
+.flex-item label {
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+.flex-item input {
+  flex-grow: 1;
+}
+
+.checkbox-container {
   margin-bottom: 10px;
 }
-textarea, input {
-  width: 300px;
+
+.generate-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
-button {
-  margin-top: 20px;
+
+.generate-btn:hover {
+  background-color: #45a049;
 }
 </style>

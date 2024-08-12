@@ -13,13 +13,13 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
-    server: {
-        proxy: {
-            '/api': {
-                target: 'http://localhost:2024', // 替换为你的服务器地址
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, '')
-            }
-        }
-    }
+    // server: {
+    //     proxy: {
+    //         '/api': {
+    //             target: '127.0.0.1:2024', // 替换为你的服务器地址
+    //             changeOrigin: true,
+    //             rewrite: (path) => path.replace(/^\/api/, '')
+    //         }
+    //     }
+    // }
 })
