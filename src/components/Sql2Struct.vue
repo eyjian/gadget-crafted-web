@@ -123,7 +123,7 @@ body {
 .container {
   max-width: 1350px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 100px; /* 影响页面整体布局是否居中 */
   font-family: Arial, sans-serif;
   color: black;
 }
