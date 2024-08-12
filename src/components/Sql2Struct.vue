@@ -15,6 +15,15 @@
           <label for="packageNameInput">包名:</label>
           <input type="text" id="packageNameInput" v-model="request.package_name">
         </div>
+        <div class="flex-item"> <!-- 自定义标签 -->
+          <label for="customTagsInput">自定义 Tags:</label>
+          <input type="text" id="customTagsInput" v-model="request.custom_tags" placeholder="例如：">
+        </div>
+      </div>
+    </div>
+
+    <div class="input-section">
+      <div class="flex-container">
         <div class="flex-item">
           <label for="tablePrefixInput">表名前缀:</label>
           <input type="text" id="tablePrefixInput" v-model="request.table_prefix" placeholder="例如：t_">
@@ -22,14 +31,6 @@
         <div class="flex-item">
           <label for="fieldPrefixInput">字段名前缀:</label>
           <input type="text" id="fieldPrefixInput" v-model="request.field_prefix" placeholder="例如：f_">
-        </div>
-      </div>
-
-      <!-- 自定义标签 -->
-      <div class="flex-container">
-        <div class="flex-item">
-          <label for="customTagsInput">Custom Tags:</label>
-          <input type="text" id="customTagsInput" v-model="request.custom_tags" placeholder="例如：">
         </div>
       </div>
     </div>
@@ -77,13 +78,13 @@ export default {
         Result: ''
       },
       booleanOptions: {
-        with_gorm: '是否生成 Gorm tag',
-        with_json: '是否生成 Json tag',
-        with_db: '是否生成 Db tag',
-        with_form: '是否生成 Form tag',
+        with_gorm: '是否生成 Gorm Tag',
+        with_json: '是否生成 Json Tag',
+        with_db: '是否生成 DB Tag',
+        with_form: '是否生成 Form Tag',
         with_table_name_func: '是否生成 TableName 方法',
-        json_with_prefix: '生成的 Json tag 时是否添加前缀',
-        FormWith栏位: '生成的 Form tag 时是否添加前栏位'
+        json_with_prefix: '生成的 Json Tag 时是否添加前缀',
+        form_with_prefix: '生成的 Form Tag 时是否添加前缀'
       }
     };
   },
@@ -117,7 +118,7 @@ export default {
 <style>
 /* 样式可以根据需要进行调整 */
 .container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -129,7 +130,7 @@ h1 {
 }
 
 .input-section, .switch-section, .output-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .wd-1200 {
