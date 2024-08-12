@@ -115,8 +115,16 @@ export default {
 </script>
 
 <style>
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 body {
   background-color: white;
+  alignment: center;
+  align-self: center;
 }
 
 /* 样式可以根据需要进行调整 */
@@ -126,11 +134,6 @@ body {
   padding: 100px; /* 影响页面整体布局是否居中 */
   font-family: Arial, sans-serif;
   color: black;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
 }
 
 .input-section, .switch-section, .output-section {
@@ -211,4 +214,5 @@ h1 {
     flex: 0 0 calc(33.33% - 10px); /* 33.33%即每行3个，减去间距确保最后一行的元素也能对齐 */
   }
 }
+
 </style>
