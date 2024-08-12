@@ -116,12 +116,17 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: white;
+}
+
 /* 样式可以根据需要进行调整 */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+  color: black;
 }
 
 h1 {
@@ -167,7 +172,7 @@ h1 {
   padding: 10px;
   font-size: 16px;
   background-color: #4CAF50;
-  color: white;
+  color: black;
   border: none;
   cursor: pointer;
 }
