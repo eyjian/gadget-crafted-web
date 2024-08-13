@@ -5,7 +5,9 @@
     <!-- 输入框 -->
     <div class="input-section">
       <label for="sqlInput">建表 SQL 语句:</label>
-      <textarea class="wd-1200" id="sqlInput" v-model="request.sql" rows="10"></textarea>
+      <div class="textarea-container">
+        <textarea class="wd-1200" id="sqlInput" v-model="request.sql" rows="15"></textarea>
+      </div>
     </div>
 
     <!-- 前缀控制 -->
@@ -48,7 +50,7 @@
     <!-- 结果框 -->
     <div class="output-section">
       <label for="resultInput">响应结果:</label>
-      <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="10" readonly></textarea>
+      <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="15" readonly></textarea>
     </div>
   </div>
 </template>
@@ -82,13 +84,18 @@ export default {
         with_db: '生成 DB Tag',
         with_form: '生成 Form Tag',
         with_table_name_func: '生成 TableName 方法',
-        json_with_prefix: 'Json Tag 添加前缀',
-        form_with_prefix: 'Form Tag 添加前缀'
+        json_with_prefix: 'Json Tag 保留前缀',
+        form_with_prefix: 'Form Tag 保留前缀'
       }
     };
   },
   methods: {
     async sendRequest() {
+      if (!this.request.sql.trim()) {
+        alert('请输入建表 SQL 语句');
+        return;
+      }
+
       try {
         const response = await fetch('http://127.0.0.1:2024/api/sql2struct', {
           method: 'POST',
@@ -100,14 +107,17 @@ export default {
         });
 
         if (!response.ok) {
-          throw new Error('网络响应错误');
+          const responseBody = await response.text(); // 等待获取响应体的文本内容
+          console.error(responseBody); // 打印响应体的文本内容
+          this.response.Result = `服务响应错误: ${responseBody}`;
+          throw new Error(this.response.Result); // 抛出包含响应体内容的错误
         }
 
         const data = await response.json();
         this.response.Result = data.result;
       } catch (error) {
         console.error('请求失败:', error);
-        this.response.Result = '请求失败，请检查控制台错误信息。';
+        //this.response.Result = '请求失败，请检查控制台错误信息。';
       }
     }
   }
@@ -129,15 +139,19 @@ body {
 
 /* 样式可以根据需要进行调整 */
 .container {
+  margin: 10px auto 0;
   max-width: 1350px;
-  margin: 0 auto;
-  padding: 100px; /* 影响页面整体布局是否居中 */
+  padding: 10px; /* 影响页面整体布局是否居中 */
   font-family: Arial, sans-serif;
   color: black;
 }
 
-.input-section, .switch-section, .output-section {
-  margin-bottom: 20px;
+.input-section {
+  margin-bottom: 2px;
+}
+
+.switch-section, .output-section {
+  margin-bottom: 10px;
 }
 
 .wd-1200 {
@@ -149,12 +163,13 @@ body {
   display: flex; /* 使容器成为一个 flex 容器 */
   align-items: center; /* 水平居中对齐 flex 容器内的元素 */
   //justify-content: center; /* 垂直居中对齐 flex 容器内的元素 */
-  gap: 10px; /* 在 flex 容器内的元素之间添加间距 */
+  gap: 10px; /* 调整flex容器或grid容器中子元素之间的间距 */
 }
 
 .flex-item {
   display: flex;
   align-items: center;
+  padding: 10px; /* 调整flex子元素的内边距 */
 }
 
 .flex-item label {
@@ -184,6 +199,7 @@ body {
 
 .generate-btn:hover {
   background-color: #45a049;
+  color: white;
 }
 
 .grid-container {
