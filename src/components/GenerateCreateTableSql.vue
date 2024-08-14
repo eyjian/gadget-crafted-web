@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>SQL 转 Go Struct 在线工具</h1>
+    <h1>生成建表 SQL 在线工具</h1>
 
     <!-- 输入框 -->
     <div class="input-section">
@@ -139,11 +139,9 @@ body {
 
 /* 样式可以根据需要进行调整 */
 .container {
-  box-sizing: border-box; /* 包括内边距和边框在内的宽度和高度 */
   margin: 10px auto 0;
-  width: 1350px; /* 固定宽度 */
-  height: auto; /* 高度可以根据内容自适应，如果不需要自适应，也可以设置为固定值 */
-  padding: 10px;
+  max-width: 1350px;
+  padding: 10px; /* 影响页面整体布局是否居中 */
   font-family: Arial, sans-serif;
   color: black;
 }

@@ -1,88 +1,119 @@
-<script setup>
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+<template>
+  <div class="container">
+    <h1>小工具</h1>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
 </script>
 
-<template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Documentation</template>
+<style>
 
-    Vue’s
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
-  </WelcomeItem>
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
+body {
+  background-color: white;
+  alignment: center;
+  align-self: center;
+}
 
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
+/* 样式可以根据需要进行调整 */
+.container {
+  margin: 10px auto 0;
+  max-width: 1350px;
+  padding: 10px; /* 影响页面整体布局是否居中 */
+  font-family: Arial, sans-serif;
+  color: black;
+}
 
-    <br />
+.input-section {
+  margin-bottom: 2px;
+}
 
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
+.switch-section, .output-section {
+  margin-bottom: 10px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
+.wd-1200 {
+  width: 100%;
+  max-width: 1350px;
+}
 
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
+.flex-container {
+  display: flex; /* 使容器成为一个 flex 容器 */
+  align-items: center; /* 水平居中对齐 flex 容器内的元素 */
+//justify-content: center; /* 垂直居中对齐 flex 容器内的元素 */
+  gap: 10px; /* 调整flex容器或grid容器中子元素之间的间距 */
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
+.flex-item {
+  display: flex;
+  align-items: center;
+  padding: 10px; /* 调整flex子元素的内边距 */
+}
 
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
+.flex-item label {
+  white-space: nowrap;
+  margin-right: 10px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
+.flex-item input {
+  flex-grow: 1;
+}
 
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
-</template>
+.checkbox-container {
+  margin-bottom: 10px; /* 可选：为每个复选框容器添加底部边距 */
+}
+
+.generate-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: black;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px; /* 调整这个值以增加按钮和结果框之间的间距 */
+}
+
+.generate-btn:hover {
+  background-color: #45a049;
+  color: white;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 第一行显示4个flex-container */
+  grid-gap: 10px; /* 设置网格间距 */
+}
+
+.switch-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px; /* 调整这个值以减少两行间的间距 */
+}
+
+.flex-column {
+  flex: 0 0 calc(25% - 10px); /* 25%即每行4个，减去间距确保最后一行的元素也能对齐 */
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .flex-column {
+    flex: 0 0 calc(33.33% - 10px); /* 33.33%即每行3个，减去间距确保最后一行的元素也能对齐 */
+  }
+}
+
+</style>
