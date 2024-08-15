@@ -147,6 +147,7 @@ body {
 }
 
 .input-section {
+  flex-direction: column;
   margin-bottom: 2px;
 }
 

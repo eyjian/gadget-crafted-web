@@ -5,10 +5,10 @@
     <div class="flex-input">
       <!-- 输入框 -->
       <div class="input-section">
-        <label for="sqlInput">建表 SQL 语句:</label>
-        <div class="textarea-container">
-          <textarea class="wd-1200" id="sqlInput" v-model="request.sql" rows="15"></textarea>
-        </div>
+        <label for="sqlInput">建表 SQL 语句:</label><p></p>
+        <!--div class="textarea-container"-->
+          <textarea id="sqlInput" v-model="request.sql" rows="15"></textarea>
+        <!--/div-->
       </div>
       <!-- 间隙 -->
       <div class="input-gap">
@@ -62,7 +62,7 @@
 
     <!-- 结果框 -->
     <div class="output-section">
-      <label for="resultInput">响应结果:</label>
+      <label for="resultInput">Go Struct:</label>
       <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="15" readonly></textarea>
     </div>
   </div>
@@ -180,18 +180,22 @@ body {
 }
 
 .input-section {
+  display: inline-block;
   margin-bottom: 2px;
   flex:495;
 }
 
 .input-gap {
+  width: 100%;
   margin-bottom: 20%;
   flex:5;
+  alignment: left;
 }
 
 .input-example {
   margin-bottom: 2px;
   flex:400;
+  alignment: left;
 }
 
 #sqlExample{
@@ -204,6 +208,19 @@ body {
   resize: none; /* 禁止调整大小 */
   overflow: hidden; /* 隐藏滚动条 */
   color: #888;
+}
+
+#sqlInput{
+  width: 570px;
+  resize: both; /* 允许用户自由放大或缩小textarea */
+  overflow: auto;
+  flex-grow: 1; /* 让textarea占据剩余空间 */
+  overflow: auto; /* 当内容超出容器时出现滚动条 */
+  resize: vertical; /* 只允许垂直调整大小 */
+}
+
+#resultInput{
+  resize: vertical; /* 只允许垂直调整大小 */
 }
 
 .output-section {
