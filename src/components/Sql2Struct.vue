@@ -188,8 +188,6 @@ body {
 .left-div,
 .center-div,
 .right-div {
-  flex: 1; /* 让每个子div都填满父div的宽度，并且高度跟随父div变化 */
-  display: flex;
   align-items: center; /* 垂直居中对齐内容 */
   justify-content: center; /* 水平居中对齐内容 */
   border: 0px solid #ccc; /* 添加边框以便观察效果 */
@@ -198,20 +196,17 @@ body {
 .input-sql {
   display: inline-block;
   margin: 2px;
-  flex:560;
+  flex:55;
 }
 
 .input-gap {
-  width: 100%;
-  margin: 1px;
-  flex: 2;
-  alignment: right;
+  margin: 2px;
 }
 
 .input-example {
   display: inline-block;
   margin: 2px;
-  flex: 438;
+  flex: 45;
   alignment: left;
 }
 
@@ -228,7 +223,7 @@ body {
 }
 
 #sqlInput{
-  width: 570px;
+  min-width: 630px;
   resize: both; /* 允许用户自由放大或缩小textarea */
   overflow: auto;
   flex-grow: 1; /* 让textarea占据剩余空间 */
@@ -305,18 +300,6 @@ body {
 .switch-section {
   display: flex;
   flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 10px; /* 调整这个值以减少两行间的间距 */
-}
-
-.flex-column {
-  flex: 0 0 calc(25% - 10px); /* 25%即每行4个，减去间距确保最后一行的元素也能对齐 */
-  margin-right: 10px;
-  margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
