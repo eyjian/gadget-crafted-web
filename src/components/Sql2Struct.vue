@@ -3,22 +3,19 @@
     <h1>SQL 转 Go Struct 在线工具</h1>
 
     <div class="flex-input">
-      <!-- 输入框 -->
-      <div class="input-section">
+      <!-- 左：输入框 -->
+      <div class="left-div input-sql">
         <label for="sqlInput">建表 SQL 语句:</label><p></p>
-        <!--div class="textarea-container"-->
-          <textarea id="sqlInput" v-model="request.sql" rows="15"></textarea>
-        <!--/div-->
+        <textarea id="sqlInput" v-model="request.sql" rows="15" @input="updateHeight"></textarea>
       </div>
-      <!-- 间隙 -->
-      <div class="input-gap">
+      <!-- 中：间隙 -->
+      <div class="center-div input-gap">
       </div>
-      <!-- 示例框 -->
-      <div class="input-example">
-        <label for="sqlExample">示例:</label>
-        <div class="textarea-container">
-          <textarea id="sqlExample" v-model="sqlExample" rows="15" readonly>
-          </textarea>
+      <!-- 右：示例框 -->
+      <div class="right-div input-example">
+        <label for="sqlExample">示例:</label><p></p>
+        <div id="flex-sql-example">
+          <textarea id="sqlExample" v-model="sqlExample" rows="15" readonly></textarea>
         </div>
       </div>
     </div>
@@ -100,20 +97,27 @@ export default {
         json_with_prefix: 'Json Tag 保留前缀',
         form_with_prefix: 'Form Tag 保留前缀'
       },
-      sqlExample: `-- 只能一个"CREATE TABLE"
+      sqlExample: `-- 规范约束：只能一个"CREATE TABLE"，每行一个字段
 CREATE TABLE \`t_user\` ( -- 需独占一行
-  f_id int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-  f_name varchar(255) NOT NULL DEFAULT '' COMMENT '姓名',
-  f_age int(11) NOT NULL DEFAULT '0' COMMENT '年龄',
-  f_phone VARCHAR(11) NOT NULL COMMENT '手机',
-  f_email VARCHAR(50) NOT NULL COMMENT '电子邮箱',
-  f_address VARCHAR(100) NOT NULL COMMENT '联系地址',
-  f_memo VARCHAR(100) DEFAULT '' COMMENT '备注',
-  PRIMARY KEY (f_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`
+  f_id INT NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  f_name VARCHAR NOT NULL DEFAULT '' COMMENT '姓名',
+  f_age INT NOT NULL DEFAULT '0' COMMENT '年龄',
+  f_phone VARCHAR NOT NULL COMMENT '手机',
+  f_email VARCHAR NOT NULL COMMENT '电子邮箱',
+  f_address VARCHAR NOT NULL COMMENT '联系地址',
+  f_memo VARCHAR DEFAULT '' COMMENT '备注',
+  PRIMARY KEY (f_id) -- 需独占一行
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; -- 需独占一行`
     };
   },
   methods: {
+    updateHeight() {
+      const sqlInput = document.getElementById('sqlInput');
+      const sqlExample = document.getElementById('sqlExample');
+      const flexSqlExample = document.getElementById('flex-sql-example');
+      sqlExample.style.height = sqlInput.scrollHeight + 'px';
+    },
+
     async sendRequest() {
       if (!this.request.sql.trim()) {
         this.request.sql = this.sqlExample
@@ -149,6 +153,7 @@ CREATE TABLE \`t_user\` ( -- 需独占一行
     }
   }
 };
+
 </script>
 
 <style>
@@ -177,24 +182,36 @@ body {
 
 .flex-input {
   display: flex;
+  flex-direction: row; /* 默认值，水平排列子元素 */
 }
 
-.input-section {
+.left-div,
+.center-div,
+.right-div {
+  flex: 1; /* 让每个子div都填满父div的宽度，并且高度跟随父div变化 */
+  display: flex;
+  align-items: center; /* 垂直居中对齐内容 */
+  justify-content: center; /* 水平居中对齐内容 */
+  border: 0px solid #ccc; /* 添加边框以便观察效果 */
+}
+
+.input-sql {
   display: inline-block;
-  margin-bottom: 2px;
-  flex:495;
+  margin: 2px;
+  flex:560;
 }
 
 .input-gap {
   width: 100%;
-  margin-bottom: 20%;
-  flex:5;
-  alignment: left;
+  margin: 1px;
+  flex: 2;
+  alignment: right;
 }
 
 .input-example {
-  margin-bottom: 2px;
-  flex:400;
+  display: inline-block;
+  margin: 2px;
+  flex: 438;
   alignment: left;
 }
 
@@ -216,7 +233,7 @@ body {
   overflow: auto;
   flex-grow: 1; /* 让textarea占据剩余空间 */
   overflow: auto; /* 当内容超出容器时出现滚动条 */
-  resize: vertical; /* 只允许垂直调整大小 */
+  /* resize: vertical; 只允许垂直调整大小 */
 }
 
 #resultInput{
