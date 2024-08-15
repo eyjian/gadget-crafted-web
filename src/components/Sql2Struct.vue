@@ -181,12 +181,12 @@ body {
 
 .input-section {
   margin-bottom: 2px;
-  flex:490;
+  flex:495;
 }
 
 .input-gap {
   margin-bottom: 20%;
-  flex:10;
+  flex:5;
 }
 
 .input-example {
