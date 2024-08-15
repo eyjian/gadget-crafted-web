@@ -6,17 +6,17 @@
       <!-- 左：输入框 -->
       <div class="left-div input-sql">
         <label for="sqlInput">建表 SQL 语句:</label><p></p>
-        <textarea id="sqlInput" v-model="request.sql" rows="15" @input="updateHeight"></textarea>
+        <textarea id="sqlInput" v-model="request.sql" rows="15"></textarea>
       </div>
+
       <!-- 中：间隙 -->
       <div class="center-div input-gap">
+
       </div>
       <!-- 右：示例框 -->
       <div class="right-div input-example">
         <label for="sqlExample">示例:</label><p></p>
-        <div id="flex-sql-example">
-          <textarea id="sqlExample" v-model="sqlExample" rows="15" readonly></textarea>
-        </div>
+        <textarea id="sqlExample" v-model="sqlExample" rows="15" readonly></textarea>
       </div>
     </div>
 
@@ -111,13 +111,6 @@ CREATE TABLE \`t_user\` ( -- 需独占一行
     };
   },
   methods: {
-    updateHeight() {
-      const sqlInput = document.getElementById('sqlInput');
-      const sqlExample = document.getElementById('sqlExample');
-      const flexSqlExample = document.getElementById('flex-sql-example');
-      sqlExample.style.height = sqlInput.scrollHeight + 'px';
-    },
-
     async sendRequest() {
       if (!this.request.sql.trim()) {
         this.request.sql = this.sqlExample
@@ -216,7 +209,7 @@ body {
     如果没有设置 width 或者将其设置为其他值（如 auto），元素可能会根据其内容自动调整宽度，这可能导致元素收缩到左侧或右侧，而不是填充满整个父容器。
   */
   width: 100%;
-  height: 100%;
+  height: 88.5%;
   resize: none; /* 禁止调整大小 */
   overflow: hidden; /* 隐藏滚动条 */
   color: #888;
