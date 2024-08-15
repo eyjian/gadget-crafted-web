@@ -2,11 +2,24 @@
   <div class="container">
     <h1>SQL 转 Go Struct 在线工具</h1>
 
-    <!-- 输入框 -->
-    <div class="input-section">
-      <label for="sqlInput">建表 SQL 语句:</label>
-      <div class="textarea-container">
-        <textarea class="wd-1200" id="sqlInput" v-model="request.sql" rows="15"></textarea>
+    <div class="flex-input">
+      <!-- 输入框 -->
+      <div class="input-section">
+        <label for="sqlInput">建表 SQL 语句:</label>
+        <div class="textarea-container">
+          <textarea class="wd-1200" id="sqlInput" v-model="request.sql" rows="15"></textarea>
+        </div>
+      </div>
+      <!-- 间隙 -->
+      <div class="input-gap">
+      </div>
+      <!-- 示例框 -->
+      <div class="input-example">
+        <label for="sqlExample">示例:</label>
+        <div class="textarea-container">
+          <textarea id="sqlExample" v-model="sqlExample" rows="15" readonly>
+          </textarea>
+        </div>
       </div>
     </div>
 
@@ -45,7 +58,7 @@
     </div>
 
     <!-- 生成按钮 -->
-    <button class="generate-btn" @click="sendRequest">生成 struct</button>
+    <button class="generate-btn" @click="sendRequest">根据建表 SQL 生成 Go struct</button>
 
     <!-- 结果框 -->
     <div class="output-section">
@@ -86,11 +99,25 @@ export default {
         with_table_name_func: '生成 TableName 方法',
         json_with_prefix: 'Json Tag 保留前缀',
         form_with_prefix: 'Form Tag 保留前缀'
-      }
+      },
+      sqlExample: `-- 只能一个"CREATE TABLE"
+CREATE TABLE \`t_user\` ( -- 需独占一行
+  f_id int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  f_name varchar(255) NOT NULL DEFAULT '' COMMENT '姓名',
+  f_age int(11) NOT NULL DEFAULT '0' COMMENT '年龄',
+  f_phone VARCHAR(11) NOT NULL COMMENT '手机',
+  f_email VARCHAR(50) NOT NULL COMMENT '电子邮箱',
+  f_address VARCHAR(100) NOT NULL COMMENT '联系地址',
+  f_memo VARCHAR(100) DEFAULT '' COMMENT '备注',
+  PRIMARY KEY (f_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`
     };
   },
   methods: {
     async sendRequest() {
+      if (!this.request.sql.trim()) {
+        this.request.sql = this.sqlExample
+      }
       if (!this.request.sql.trim()) {
         alert('请输入建表 SQL 语句');
         return;
@@ -148,11 +175,42 @@ body {
   color: black;
 }
 
-.input-section {
-  margin-bottom: 2px;
+.flex-input {
+  display: flex;
 }
 
-.switch-section, .output-section {
+.input-section {
+  margin-bottom: 2px;
+  flex:490;
+}
+
+.input-gap {
+  margin-bottom: 20%;
+  flex:10;
+}
+
+.input-example {
+  margin-bottom: 2px;
+  flex:400;
+}
+
+#sqlExample{
+  /*
+    没有这个的时候会收缩到左侧，将 width 设置为 100% 可以确保元素完全填充满其父容器的宽度；
+    如果没有设置 width 或者将其设置为其他值（如 auto），元素可能会根据其内容自动调整宽度，这可能导致元素收缩到左侧或右侧，而不是填充满整个父容器。
+  */
+  width: 100%;
+  height: 100%;
+  resize: none; /* 禁止调整大小 */
+  overflow: hidden; /* 隐藏滚动条 */
+  color: #888;
+}
+
+.output-section {
+  margin-bottom: 10px;
+}
+
+.switch-section {
   margin-bottom: 10px;
 }
 
