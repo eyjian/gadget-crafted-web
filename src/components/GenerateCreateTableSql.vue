@@ -144,11 +144,12 @@ label {
 }
 
 #container-tablename {
-  flex: 30;
+  flex: 15;
 }
 
 #container-delimiter {
-  flex: 70;
+  flex: 85;
+  width: 100%;
 }
 
 #input-tablename{
