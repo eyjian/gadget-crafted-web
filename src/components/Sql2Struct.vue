@@ -132,6 +132,7 @@ CREATE TABLE \`t_user\` ( -- 需独占一行
         return;
       }
 
+      let response; // 在try块外声明response变量
       try {
         const response = await fetch('http://127.0.0.1:2024/api/sql2struct', {
           method: 'POST',
@@ -152,8 +153,11 @@ CREATE TABLE \`t_user\` ( -- 需独占一行
         const data = await response.json();
         this.response.Result = data.result;
       } catch (error) {
-        console.error('请求失败:', error);
-        //this.response.Result = '请求失败，请检查控制台错误信息。';
+        if (response) {
+          console.error('请求失败，状态码:', response.status);
+        }
+        console.error('请求失败:', error.message);
+        this.response.Result = '请求失败: ' + error.message;
       }
     }
   }

@@ -120,8 +120,14 @@ f_memo ;VARCHAR DEFAULT '' ;备注`
             console.error('HTTP 400 错误内容:', errorContent);
             this.response.Result = '请求失败，错误内容：' + JSON.stringify(errorContent);
           }
+        } else if (error.request) {
+          // 请求已发出，但没有收到响应
+          console.error('没有收到服务响应:', error.request);
+          this.response.Result = '没有收到服务响应';
         } else {
-          this.response.Result = '请求失败，请检查控制台错误信息。';
+          // 在设置请求时发生了一些事情，触发了错误
+          console.error('请求设置错误:', error.message);
+          this.response.Result = '请求设置错误';
         }
       }
     },
