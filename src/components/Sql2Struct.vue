@@ -59,8 +59,10 @@
 
     <!-- 结果框 -->
     <div class="output-section">
-      <label for="resultInput">Go Struct:</label>
-      <button id="copy-btn" @click="copyResult">复制</button>
+      <div class="flex-label">
+        <label for="resultInput">Go Struct:</label>
+        <button id="copy-btn" @click="copyResult">复制</button>
+      </div>
       <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="16"></textarea>
     </div>
   </div>
@@ -302,6 +304,11 @@ body {
 .switch-section {
   display: flex;
   flex-direction: column;
+}
+
+.flex-label {
+  display: flex;
+  align-items: center; /* 垂直居中对齐子元素 */
 }
 
 @media (max-width: 768px) {
