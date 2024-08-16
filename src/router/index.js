@@ -5,9 +5,8 @@ import Sql2Struct from '../components/Sql2Struct.vue';
 
 const routes = [
     {
-        path: '/welcome',
-        name: 'welcome',
-        component: TheWelcome
+        path: '/',
+        redirect: '/gcts',
     },
     {
         path: '/gcts',
