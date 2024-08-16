@@ -126,6 +126,83 @@ server {
 
 可从 [Let's Encrypt](https://letsencrypt.org/) 获取免费的 SSL 证书。
 
+# 申请免费证书
+
+* 安装 Certbot
+
+**基于 Debian 的系统（如 Ubuntu）**
+
+```shell
+sudo apt update
+sudo apt install certbot python3-certbot-nginx # 对于Nginx服务器
+# 或者
+sudo apt install certbot python3-certbot-apache # 对于Apache服务器
+```
+
+**基于 RPM 的系统（如 CentOS/RHEL）**
+
+```shell
+sudo yum install epel-release
+sudo yum install certbot python3-certbot-nginx # 对于Nginx服务器
+# 或者
+sudo yum install certbot python3-certbot-apache # 对于Apache服务器
+```
+
+**使用 DNF 的系统（如 Fedora）**
+
+```shell
+sudo dnf install certbot python3-certbot-nginx # 对于Ngin下服务器
+# 或者
+sudo dnf install certbot python3-certbot-apache # 对于Apache服务器
+```
+
+* 获取并安装证书
+
+```shell
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+# 或者
+sudo certbot --apache -d yourdomain.com -d www.yourdomain.com
+```
+
+yourdomain.com 和 www.yourdomain.com 需要替换为实际的域名，比如：hwten.cn 。
+
+* 验证所有权
+
+```
+Certbot 将会通过访问在域名上配置的特定路径来验证对域名的所有权，可能需要按照 Certbot 的提示创建一个文件或修改 DNS 记录。
+```
+
+* 完成安装
+
+一旦所有权验证成功，Certbot 将会下载并安装 SSL 证书，并自动更新 Web 服务器配置。
+
+* 测试证书
+
+打开浏览器，访问域名，确保它现在使用 HTTPS 并提供安全的连接。
+
+* 设置自动更新
+
+Let's Encrypt 证书有效期为 90 天，因此建议设置自动更新，Certbot 可以在证书即将过期时自动更新它们。
+
+```shell
+sudo systemctl enable certbot.timer
+sudo systemctl start certbot.timer
+```
+
+如果没有使用systemd，可以使用以下命令：
+
+```shell
+sudo crontab -e
+```
+
+然后添加以下行来设置定时任务（每天检查一次）：
+
+```
+0 0 * * * /usr/bin/certbot renew --quiet
+```
+
+请注意，自动更新过程不会中断正在运行的服务，但可能会短暂影响性能，确保在生产环境中测试自动更新过程。
+
 # gadget-crafted-web
 
 This template should help get you started developing with Vue 3 in Vite.
