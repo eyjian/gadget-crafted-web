@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>SQL 转 Go Struct 在线工具</h1>
+    <h1>SQL 转 Go Struct 工具</h1>
 
     <div class="flex-input">
       <!-- 左：输入框 -->
