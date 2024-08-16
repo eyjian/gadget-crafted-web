@@ -103,6 +103,27 @@ server {
 上述第一个 location / { ... } 块配置了 Vue 项目的静态文件服务，root 指令指定了静态文件的目录，try_files 指令确保了 Vue 路由的正确工作。
 第二个 location /api/ { ... } 块配置了 API 请求的代理。所有以 /api/ 开头的请求都会被转发到后端服务 http://backend-service:3000 。
 
+nginx 配置 https：
+
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com; # 替换为实际域名
+    return 301 https://$host$request_uri; # 将HTTP请求重定向到HTTPS
+}
+server {
+    listen 443 ssl;
+    server_name yourdomain.com; # 替换为域名
+    
+    ssl_certificate /path/to/server.crt; # 替换为 SSL 证书路径
+    ssl_certificate_key /path/to/server.key; # 替换为私钥路径
+    
+    # 其他配置...
+}
+```
+
+可从 [Let's Encrypt](https://letsencrypt.org/) 获取免费的 SSL 证书。
+
 # gadget-crafted-web
 
 This template should help get you started developing with Vue 3 in Vite.
