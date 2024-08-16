@@ -60,7 +60,8 @@
     <!-- 结果框 -->
     <div class="output-section">
       <label for="resultInput">Go Struct:</label>
-      <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="15" readonly></textarea>
+      <button id="copy-btn" @click="copyResult">复制</button>
+      <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="16"></textarea>
     </div>
   </div>
 </template>
@@ -111,6 +112,16 @@ CREATE TABLE \`t_user\` ( -- 需独占一行
     };
   },
   methods: {
+    copyResult() {
+      const resultInput = document.getElementById('resultInput');
+      navigator.clipboard.writeText(resultInput.value)
+          .then(() => {
+            console.log('Text copied to clipboard');
+          })
+          .catch(err => {
+            console.error('Could not copy text: ', err);
+          });
+    },
     async sendRequest() {
       if (!this.request.sql.trim()) {
         this.request.sql = this.sqlExample
@@ -236,9 +247,8 @@ body {
   margin-bottom: 10px;
 }
 
-.wd-1200 {
-  width: 100%;
-  max-width: 1350px;
+#copy-btn {
+  margin: 10px;
 }
 
 .flex-container {
