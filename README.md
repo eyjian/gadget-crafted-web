@@ -203,6 +203,14 @@ sudo crontab -e
 
 请注意，自动更新过程不会中断正在运行的服务，但可能会短暂影响性能，确保在生产环境中测试自动更新过程。
 
+# 安全配置 nginx
+
+```shell
+sudo chown -R root:root /etc/nginx
+sudo chmod -R 750 /etc/nginx
+sudo chmod 640 /etc/nginx/conf.d/*
+```
+
 # gadget-crafted-web
 
 This template should help get you started developing with Vue 3 in Vite.
