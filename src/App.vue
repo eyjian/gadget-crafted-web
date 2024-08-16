@@ -18,7 +18,7 @@ export default {
   name: 'App',
   data() {
     return {
-      imgUrl: '../public/favicon.png',
+      imgUrl: '/public/favicon.png',
       imgAlt: 'Logo',
       imgWidth: '64px',   // 设置图片宽度
       imgHeight: '64px',  // 设置图片高度
