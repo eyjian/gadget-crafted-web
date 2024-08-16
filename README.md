@@ -1,3 +1,7 @@
+# nginx
+
+macOS 上 nginx 的配置文件位置：/opt/homebrew/etc/nginx/nginx.conf，nginx 的安装方法：brew install nginx，安装成功后命令位于：brew install nginx 。
+
 # gadget-crafted-web
 
 This template should help get you started developing with Vue 3 in Vite.
