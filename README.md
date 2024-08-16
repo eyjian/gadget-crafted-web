@@ -2,6 +2,8 @@
 
 macOS 上 nginx 的配置文件位置：/opt/homebrew/etc/nginx/nginx.conf，nginx 的安装方法：brew install nginx，安装成功后命令位于：brew install nginx 。
 
+centOS 上安装 nginx：yum install nginx，配置文件路径：/etc/nginx/nginx.conf，命令文件路径：/usr/sbin/nginx 。
+
 管理 nginx ：
 
 ```shell
