@@ -86,6 +86,14 @@ f_memo ;VARCHAR DEFAULT '' ;备注`
         this.request.table_name = "t_user";
         this.request.delimiter = ";";
       }
+      if (!this.request.delimiter.trim() || this.request.delimiter.trim().length !== 1) {
+        alert('请指定单个字符作为分隔符');
+        return;
+      }
+      if (!this.request.table_name.trim()) {
+        alert('请指定表名');
+        return;
+      }
       if (!this.request.text.trim()) {
         alert('请输入建表文本');
         return;
@@ -102,7 +110,19 @@ f_memo ;VARCHAR DEFAULT '' ;备注`
         this.response.Result = response.data.create_table_sql;
       } catch (error) {
         console.error('请求失败:', error);
-        this.response.Result = '请求失败，请检查控制台错误信息。';
+
+        // 检查 error.response 是否存在
+        if (error.response) {
+          // 检查 HTTP 状态码是否为 400
+          if (error.response.status === 400) {
+            // 获取错误内容
+            const errorContent = error.response.data;
+            console.error('HTTP 400 错误内容:', errorContent);
+            this.response.Result = '请求失败，错误内容：' + JSON.stringify(errorContent);
+          }
+        } else {
+          this.response.Result = '请求失败，请检查控制台错误信息。';
+        }
       }
     },
   },
