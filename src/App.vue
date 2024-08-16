@@ -2,7 +2,9 @@
   <div id="app">
     <nav class="nav-bar">
       <ul>
-        <li><router-link to="/welcome">Home</router-link></li>
+        <li class="image-li">
+          <img :src="imgUrl" :alt="imgAlt" :width="imgWidth" :height="imgHeight">
+        </li>
         <li><router-link to="/gcts">生成建表SQL</router-link></li>
         <li><router-link to="/s2s">SQL转Struct</router-link></li>
       </ul>
@@ -13,7 +15,15 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      imgUrl: '../public/favicon.png',
+      imgAlt: 'Logo',
+      imgWidth: '64px',   // 设置图片宽度
+      imgHeight: '64px',  // 设置图片高度
+    };
+  },
 };
 </script>
 
@@ -23,6 +33,13 @@ export default {
   display: flex;
   width: 1500px; /* 固定宽度 */
   height: 1000px; /* 固定高度 */
+}
+
+.nav-bar ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-bar {
