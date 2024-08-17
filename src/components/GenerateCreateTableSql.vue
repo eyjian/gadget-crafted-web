@@ -39,12 +39,12 @@
     <!-- 结果框 -->
     <div class="flex-output-section">
       <div class="flex-label">
-        <label for="resultInput">建表 SQL:</label>
+        <label for="resultInput">建表 SQL:&nbsp;&nbsp;</label>
         <button id="copy-btn" @click="copyResult">复制</button>
-        <!--t-button id="copy-btn" type="primary" @click="copyResult">复制</t-button-->
+        <!--t-button-- shape="round" variant="dashed" @click="copyResult">复制</t-button-->
       </div>
       <!--textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="16"></textarea-->
-      <t-textarea class="wd-1200" id="resultInput" v-model="response.Result" :autosize="{ minRows: 16 }" placeholder="请输入内容" />
+      <t-textarea class="wd-1200" id="resultInput" v-model="response.Result" :autosize="{ minRows: 15 }" placeholder="请点击根据建表文本生成建表 SQL 按钮" />
     </div>
   </div>
 </template>
@@ -192,6 +192,7 @@ label {
 .flex-label {
   display: flex;
   align-items: center; /* 垂直居中对齐子元素 */
+  margin: 0px auto; /* 元素的上下边距为 0 像素，左右边距自动计算以实现水平居中 */
 }
 
 .flex-output-section {

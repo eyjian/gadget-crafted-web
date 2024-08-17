@@ -291,7 +291,7 @@ body {
   color: black;
   border: none;
   cursor: pointer;
-  margin-bottom: 20px; /* 调整这个值以增加按钮和结果框之间的间距 */
+  margin: 0px auto; /* 元素的上下边距为 0 像素，左右边距自动计算以实现水平居中 */
 }
 
 .generate-btn:hover {
@@ -302,17 +302,19 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 第一行显示4个flex-container */
-  grid-gap: 10px; /* 设置网格间距 */
+  grid-gap: 0px; /* 设置网格间距 */
 }
 
 .switch-section {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 .flex-label {
   display: flex;
   align-items: center; /* 垂直居中对齐子元素 */
+  margin: 0px auto;
 }
 
 @media (max-width: 768px) {
