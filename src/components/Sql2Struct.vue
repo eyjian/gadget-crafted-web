@@ -55,7 +55,7 @@
     </div>
 
     <!-- 生成按钮 -->
-    <button class="generate-btn" @click="sendRequest">根据建表 SQL 生成 Go struct</button>
+    <button class="generate-btn" @click="sendRequest" style="height: 42px;">根据建表 SQL 生成 Go struct</button>
 
     <!-- 结果框 -->
     <div class="output-section">

@@ -33,15 +33,18 @@
     </div>
 
     <!-- 生成按钮 -->
-    <button class="generate-btn" @click="sendRequest">根据建表文本生成建表 SQL</button>
+    <!--button class="generate-btn" @click="sendRequest">根据建表文本生成建表 SQL</button-->
+    <t-button block theme="primary" variant="base" class="generate-btn" @click="sendRequest" style="height: 42px; font-size: 16px">根据建表文本生成建表 SQL</t-button>
 
     <!-- 结果框 -->
     <div class="flex-output-section">
       <div class="flex-label">
         <label for="resultInput">建表 SQL:</label>
         <button id="copy-btn" @click="copyResult">复制</button>
+        <!--t-button id="copy-btn" type="primary" @click="copyResult">复制</t-button-->
       </div>
-      <textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="16"></textarea>
+      <!--textarea class="wd-1200" id="resultInput" v-model="response.Result" rows="16"></textarea-->
+      <t-textarea class="wd-1200" id="resultInput" v-model="response.Result" :autosize="{ minRows: 16 }" placeholder="请输入内容" />
     </div>
   </div>
 </template>
