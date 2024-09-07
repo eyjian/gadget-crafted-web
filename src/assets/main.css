@@ -1,35 +1,6 @@
-@import './base.css';
-
 #app {
-  max-width: 1350px;
-  margin: 0 auto; /* 设置元素的外边距。0 表示上下外边距为 0，auto 表示左右外边距自动计算，使得元素在水平方向上居中 */
-  padding: 2rem; /* 设置元素的内边距为 2rem。rem 是一个相对单位，表示相对于根元素（<html>）的字体大小。例如，如果根元素的字体大小为 16px，那么 2rem 将等于 32px（2 × 16） */
-  font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
     display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+    flex-direction: column;
+    border: 1px solid blue; /* 设置细实线边框，颜色为蓝色 */
+    height: 100vh; /* 设置高度为视口高度 */
 }
